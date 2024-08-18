@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {
+    "net7.0-windows7.0": {
       "Extended.Wpf.Toolkit/4.6.1": {
         "type": "package",
         "compile": {
@@ -118,12 +118,12 @@
           "runtime.native.System.IO.Ports": "8.0.0"
         },
         "compile": {
-          "lib/net6.0/System.IO.Ports.dll": {
+          "lib/net7.0/System.IO.Ports.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0/System.IO.Ports.dll": {
+          "lib/net7.0/System.IO.Ports.dll": {
             "related": ".xml"
           }
         },
@@ -131,11 +131,11 @@
           "buildTransitive/net6.0/_._": {}
         },
         "runtimeTargets": {
-          "runtimes/unix/lib/net6.0/System.IO.Ports.dll": {
+          "runtimes/unix/lib/net7.0/System.IO.Ports.dll": {
             "assetType": "runtime",
             "rid": "unix"
           },
-          "runtimes/win/lib/net6.0/System.IO.Ports.dll": {
+          "runtimes/win/lib/net7.0/System.IO.Ports.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -333,7 +333,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": [
+    "net7.0-windows7.0": [
       "Extended.Wpf.Toolkit >= 4.6.1",
       "System.IO.Ports >= 8.0.0"
     ]
@@ -360,7 +360,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0-windows"
+        "net7.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -368,8 +368,8 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
           "projectReferences": {}
         }
       },
@@ -380,8 +380,8 @@
       }
     },
     "frameworks": {
-      "net6.0-windows7.0": {
-        "targetAlias": "net6.0-windows",
+      "net7.0-windows7.0": {
+        "targetAlias": "net7.0-windows",
         "dependencies": {
           "Extended.Wpf.Toolkit": {
             "target": "Package",
