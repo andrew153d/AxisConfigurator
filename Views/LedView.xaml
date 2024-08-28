@@ -5,8 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AxisConfigurator"
+        xmlns:converters="clr-namespace:AxisConfigurator.Converters"
         xmlns:viewModels="clr-namespace:AxisConfigurator.ViewModels"
         d:DataContext="{d:DesignInstance viewModels:LedViewModel}">
+    <UserControl.Resources>
+        <converters:ColorToBrushConverter x:Key="colorToBrushConverter" />
+    </UserControl.Resources>
     <Grid Background="#FFC8C8C8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
@@ -37,15 +41,15 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
                     <Label Content="R:" Width="20"/>
-                    <TextBox Name="RGBR_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="40"/>
+                    <TextBox Name="RGBR_TextBox" TextWrapping="Wrap" Text="{Binding Color_R}" Height="20" Width="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                     <Label Content="G:" Width="20"/>
-                    <TextBox Name="RGBG_TextBox" TextWrapping="Wrap" Text="{Binding TestInt, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="40"/>
+                    <TextBox Name="RGBG_TextBox" TextWrapping="Wrap" Text="{Binding Color_G}" Height="20" Width="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
                     <Label Content="B:" Width="20"/>
-                    <TextBox Name="RGBB_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="40"/>
+                    <TextBox Name="RGBB_TextBox" TextWrapping="Wrap" Text="{Binding Color_B}" Height="20" Width="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                     <Label Content="H:" Width="20"/>
@@ -62,7 +66,7 @@
                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBox Name="HEX_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="50"/>
                 </StackPanel>
-                <Rectangle Name="ColorDisplay" Grid.Row="1" Grid.Column="2" Fill="Black" Margin="3">
+                <Rectangle Name="ColorDisplay" Grid.Row="1" Grid.Column="2" Fill="{Binding LedColor, Converter={StaticResource ColorToBrushConverter}}" Margin="3">
                 </Rectangle>
             </Grid>
         </StackPanel>

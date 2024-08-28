@@ -23,7 +23,6 @@ namespace AxisConfigurator.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public Color LedColor { get { return ledColor; } set {  ledColor = value; OnPropertyChanged(nameof(LedColor)); } }
-        public string Name = "test";
         public string TestInt
         {
             get
