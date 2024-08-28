@@ -23,14 +23,10 @@ namespace AxisConfigurator
     public partial class MainWindow
     {
         AxisConnection axisComms = new AxisConnection();
-        LedView ledView;
-        public MainWindow(LedView ledv)
+        public MainWindow()
         {
-            ledView = ledv;
             InitializeComponent();
             axisComms.PortConnectedAction += OnPortConnectionUpdate;
-            
-            
         }
 
         private void MyTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,7 +44,7 @@ namespace AxisConfigurator
                 }
                 else if (selectedTab == LED)
                 {
-                    ledView.OnLedTabSelected();
+                    //ledView.OnLedTabSelected();
                 }
                 else if (selectedTab == TabItem)
                 {

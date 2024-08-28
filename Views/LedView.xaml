@@ -4,7 +4,9 @@
         mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AxisConfigurator">
+        xmlns:local="clr-namespace:AxisConfigurator"
+        xmlns:viewModels="clr-namespace:AxisConfigurator.ViewModels"
+        d:DataContext="{d:DesignInstance viewModels:LedViewModel}">
     <Grid Background="#FFC8C8C8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
@@ -39,7 +41,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                     <Label Content="G:" Width="20"/>
-                    <TextBox Name="RGBG_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="40"/>
+                    <TextBox Name="RGBG_TextBox" TextWrapping="Wrap" Text="{Binding TestInt, UpdateSourceTrigger=PropertyChanged}" Height="20" Width="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
                     <Label Content="B:" Width="20"/>

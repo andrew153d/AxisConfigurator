@@ -18,13 +18,15 @@ namespace AxisConfigurator.Views
     /// <summary>
     /// Interaction logic for LedView.xaml
     /// </summary>
-    public partial class LedView
+    public partial class LedView : UserControl
     {
-        //LedViewModel ledViewModel;
+        private readonly LedViewModel ledViewModel = new LedViewModel();
         public LedView()
         {
             InitializeComponent();
             InitializeLedTab();
+
+            DataContext = ledViewModel;
             //this.ledViewModel = ledViewModel;
             //this.DataContext = ledViewModel;
         }

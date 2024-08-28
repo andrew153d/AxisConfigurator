@@ -23,6 +23,18 @@ namespace AxisConfigurator.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public Color LedColor { get { return ledColor; } set {  ledColor = value; OnPropertyChanged(nameof(LedColor)); } }
+        public string Name = "test";
+        public string TestInt
+        {
+            get
+            {
+                return "100";
+            }
+            set
+            {
+                Console.Write("setting value");
+            }
+        }
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
