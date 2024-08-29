@@ -9,7 +9,15 @@
         xmlns:viewModels="clr-namespace:AxisConfigurator.ViewModels"
         d:DataContext="{d:DesignInstance viewModels:LedViewModel}">
     <UserControl.Resources>
-        <converters:ColorToBrushConverter x:Key="colorToBrushConverter" />
+        <converters:ColorToHueConverter x:Key="ColorToHueConverter"/>
+        <converters:ColorToSaturationConverter x:Key="ColorToSaturationConverter"/>
+        <converters:ColorToValueConverter x:Key="ColorToValueConverter"/>
+        <converters:ColorToHueOnlyColorConverter x:Key="ColorToHueOnlyColorConverter"/>
+        <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter"/>
+        <converters:ColorToHueSliderConverter x:Key="ColorToHueSliderConverter"/>
+        <converters:ColorToRedConverter x:Key="ColorToRedConverter"/>
+        <converters:ColorToSaturationSelectorConverter x:Key="ColorToSaturationSelectorConverter"/>
+        <converters:ColorToValueSelectorConverter x:Key="ColorToValueSelectorConverter"/>
     </UserControl.Resources>
     <Grid Background="#FFC8C8C8">
         <Grid.ColumnDefinitions>
@@ -20,13 +28,30 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Width="200" Margin="10">
-            <Canvas Name="DrawingCanvas" Background="White" Width="200" Height="200" MouseLeftButtonDown="ColorSelector_MouseLeftButtonDown" MouseLeftButtonUp="ColorSelector_MouseLeftButtonUp" MouseMove="ColorSelector_MouseMove">
-                <Border Name="DraggableCircle"  BorderBrush="White" BorderThickness="1" CornerRadius="5" Canvas.Left="50" Canvas.Top="50">
-                    <Ellipse Width="10" Height="10" Fill="Transparent" Stroke="Black" StrokeThickness="1"/>
-                </Border>
-            </Canvas>
+            <Grid>
+                <Canvas>
+                    <Canvas.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="{Binding Path=LedColor, Converter={StaticResource ColorToHueOnlyColorConverter}}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Canvas.Background>
+                </Canvas>
+                <Canvas Name="DrawingCanvas" Width="200" Height="200" MouseLeftButtonDown="ColorSelector_MouseLeftButtonDown" MouseLeftButtonUp="ColorSelector_MouseLeftButtonUp" MouseMove="ColorSelector_MouseMove">
+                    <Canvas.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="#00000000" Offset="0"/>
+                            <GradientStop Color="Black" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Canvas.Background>
+                    <Border Name="DraggableCircle"  BorderBrush="White" BorderThickness="1" CornerRadius="5" Canvas.Left="{Binding Path=LedColor, Converter={StaticResource ColorToSaturationSelectorConverter}}" Canvas.Top="{Binding Path=LedColor, Converter={StaticResource ColorToValueSelectorConverter}}">
+                        <Ellipse Width="10" Height="10" Fill="Transparent" Stroke="Black" StrokeThickness="1"/>
+                    </Border>
+                </Canvas>
+                
+            </Grid>
             <Canvas Name="HueSelectorCanvas" Width="200" Height="20" MouseLeftButtonDown="HueSelector_MouseLeftButtonDown" MouseLeftButtonUp="HueSelector_MouseLeftButtonUp" MouseMove="HueSelector_MouseMove">
-                <Rectangle Name ="DraggableBox"  Stroke="Black" Height="21" Width="10" Canvas.Left="0" Canvas.Top="-1"/>
+                <Rectangle Canvas.Left="{Binding Path=LedColor, Converter={StaticResource ColorToHueSliderConverter}}" Name ="DraggableBox"  Stroke="Black" Height="21" Width="10" Canvas.Top="-1"/>
             </Canvas>
             <Grid Margin="0, 5">
                 <Grid.ColumnDefinitions>
@@ -53,20 +78,23 @@
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                     <Label Content="H:" Width="20"/>
-                    <TextBox Name="HSVH_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="40"/>
+                    <TextBox Name="HSVH_TextBox" TextWrapping="Wrap" Text="{Binding Path=LedColor, Converter={StaticResource ColorToHueConverter}}" Height="20" Width="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                     <Label Content="S:" Width="20"/>
-                    <TextBox Name="HSVS_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="40"/>
+                    <TextBox Name="HSVS_TextBox" TextWrapping="Wrap" Text="{Binding Path=LedColor, Converter={StaticResource ColorToSaturationConverter}}" Height="20" Width="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
                     <Label Content="V:" Width="20"/>
-                    <TextBox Name="HSVV_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="40"/>
+                    <TextBox Name="HSVV_TextBox" TextWrapping="Wrap" Text="{Binding Path=LedColor, Converter={StaticResource ColorToValueConverter}}" Height="20" Width="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBox Name="HEX_TextBox" TextWrapping="Wrap" Text="0" Height="20" Width="50"/>
+                    <TextBox Name="HEX_TextBox" TextWrapping="Wrap" Text="{Binding Path=LedColor, Converter={StaticResource ColorToHexStringConverter}}" Height="20" Width="64" FontSize="10"/>
                 </StackPanel>
-                <Rectangle Name="ColorDisplay" Grid.Row="1" Grid.Column="2" Fill="{Binding LedColor, Converter={StaticResource ColorToBrushConverter}}" Margin="3">
+                <Rectangle Name="ColorDisplay" Grid.Row="1" Grid.Column="2" Margin="3">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{Binding LedColor}"/>
+                    </Rectangle.Fill>
                 </Rectangle>
             </Grid>
         </StackPanel>

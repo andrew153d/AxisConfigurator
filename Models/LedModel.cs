@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
+using System.Windows.Media;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,23 +17,13 @@ namespace AxisConfigurator.Models
             OFF
         }
 
-        private Color ledColor = Color.Black;
+        private Color ledColor = Color.FromArgb(255, 0, 0, 0);
+
         private Mode ledMode = Mode.OFF;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         public Color LedColor { get { return ledColor; } set {  ledColor = value; OnPropertyChanged(nameof(LedColor)); } }
-        public string TestInt
-        {
-            get
-            {
-                return "100";
-            }
-            set
-            {
-                Console.Write("setting value");
-            }
-        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
