@@ -98,5 +98,12 @@
                 </Rectangle>
             </Grid>
         </StackPanel>
+        <StackPanel Grid.Column="1">
+            <ComboBox Grid.Column="1" Height="22" SelectedIndex="0" Margin="10" ItemsSource="{Binding StatusItems}" SelectedItem="{Binding SelectedStatusItem, Mode=TwoWay}" >
+            </ComboBox>
+            <Button Content="Apply" Command="{Binding ButtonClickCommand}" Margin="10">
+                
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

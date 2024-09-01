@@ -9,20 +9,67 @@ using AxisConfigurator.Models;
 using System.Windows.Input;
 using System.Windows;
 using System.Diagnostics;
+using System.Security.Permissions;
+using System.Collections.ObjectModel;
+
 namespace AxisConfigurator.ViewModels
 {
     public class LedViewModel : INotifyPropertyChanged
     {
+        
+
         public LedModel ledModel;
+        public SerialPortModel axisConn;
+        public ICommand ButtonClickCommand { get; private set; }
         public LedViewModel() 
         {
             ledModel = new LedModel();
             //StartColorSelectorDragCommand = new RelayCommand<object>(OnStartDrag);
             DragColorSelectorCommand = new RelayCommand<object>(OnColorSelectorDrag);
             DragHueSelectorCommand = new RelayCommand<object>(OnHueSelectorDrag);
-            //EndDragCommand = new RelayCommand<object>(OnEndDrag);
+            ButtonClickCommand = new RelayCommand<object>(OnButtonClick);
+            axisConn = SerialPortModel.Instance;
+
+            StatusItems = new ObservableCollection<string>
+        {
+            "OFF",
+            "FLASH_ERROR",
+            "ERROR",
+            "BOOTUP",
+            "RAINBOW",
+            "SOLID"
+        };
+
+            // Optionally initialize the selected item if needed
+            SelectedStatusItem = StatusItems[0]; // Set default selection
         }
-        // Convert Drawing.Color to Media.Color for the getter
+        private ObservableCollection<string> _statusItems;
+        private string _selectedStatusItem;
+        public ObservableCollection<string> StatusItems
+        {
+            get => _statusItems;
+            set
+            {
+                _statusItems = value;
+                OnPropertyChanged(nameof(StatusItems));
+            }
+        }
+
+        public string SelectedStatusItem
+        {
+            get => _selectedStatusItem;
+            set
+            {
+                _selectedStatusItem = value;
+                OnPropertyChanged(nameof(SelectedStatusItem));
+            }
+        }
+        private void OnButtonClick(object parameter)
+        {
+            axisConn.SetLEDColor(ledModel.LedColor.R, ledModel.LedColor.G, ledModel.LedColor.B);
+            axisConn.SetLEDState(StatusItems.IndexOf(SelectedStatusItem));
+        }
+
         public System.Windows.Media.Color LedColor
         {
             get
@@ -81,11 +128,8 @@ namespace AxisConfigurator.ViewModels
             }
         }
         
-
-        //public ICommand StartColorSelectorDragCommand { get; private set; }
         public ICommand DragColorSelectorCommand { get; private set; }
         public ICommand DragHueSelectorCommand {  get; private set; }
-        //public ICommand EndDragCommand { get; private set; }
 
         private void OnColorSelectorDrag(object currentPoint)
         {
@@ -113,20 +157,49 @@ namespace AxisConfigurator.ViewModels
             }
         }
 
-        //private void OnEndDrag(object endPoint)
-        //{
-        //    _isColorSelectorDragging = false;
-        //}
-
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
+    public class RelayCommand : ICommand
+    {
+        #region Fields
+        private readonly Action _execute;
+        private readonly Func<bool> _canExecute;
+        #endregion
+
+        #region Constructors
+        public RelayCommand(Action execute) : this(execute, null) { }
+
+        public RelayCommand(Action execute, Func<bool> canExecute)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+        #endregion
+
+        #region ICommand Members
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute();
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute();
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+        #endregion
+    }
+
     public class RelayCommand<T> : ICommand where T : class
     {
         #region Fields 

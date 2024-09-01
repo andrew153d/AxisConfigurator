@@ -18,10 +18,7 @@ namespace AxisConfigurator.Models
         }
 
         private Color ledColor = Color.FromArgb(255, 0, 0, 0);
-
-        private Mode ledMode = Mode.OFF;
-
-        public Color LedColor { get { return ledColor; } set {  ledColor = value; OnPropertyChanged(nameof(LedColor)); } }
+        public Color LedColor { get { return ledColor; } set { ledColor = value; OnPropertyChanged(nameof(LedColor)); } }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

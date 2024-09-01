@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\Andre\Documents\Tracked_Projects\AxisConfigurator\App.xaml
-2-1377107529
+51675164138
 
-10551201863
+201715159866
 204-120675826
-Views\LedView.xaml;Views\MainWindow.xaml;
+Views\LedView.xaml;Views\MainWindow.xaml;Views\MotionView.xaml;Views\SerialView.xaml;Views\TMCView.xaml;
 
 False
 

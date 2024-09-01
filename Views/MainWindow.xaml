@@ -10,18 +10,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     
-    <Grid Background="White">
-        <Button x:Name="ConnectButton" Content="Connect" Click="Button_Click" Background="#FF909090" Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TabControl x:Name="MainTabControl" Grid.Column="0" Margin="0,25,0,0" SelectionChanged="MyTabControl_SelectionChanged" SelectedIndex="1">
+    <StackPanel Background="White">
+        <views:SerialView/>
+        <!--<Button x:Name="ConnectButton" Content="Connect" Click="Button_Click" Background="#FF909090" Height="15" Width="100"/>-->
+        <TabControl x:Name="MainTabControl" Grid.Column="0" SelectedIndex="3" Height="415">
             <TabItem Header="Status" Name="Status">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="LED" Name="LED" HorizontalAlignment="Center" Width="32">
-                <views:LedView/>
-            </TabItem>
-            <TabItem Header="TabItem" Name="TabItem">
+            <TabItem Header="Motion" Name="Motion">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
+            <TabItem Header="Motor" Name="Motor">
+                <views:TMCView/>
+            </TabItem>
+            <TabItem Header="LED" Name="LED">
+                <views:LedView/>
+            </TabItem>
         </TabControl>
-    </Grid>
+    </StackPanel>
 </Window>

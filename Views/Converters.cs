@@ -163,24 +163,13 @@ namespace AxisConfigurator.Converters
                 if (hex.StartsWith("#") && (hex.Length == 7 || hex.Length == 9))
                 {
                     // If the string has 9 characters, it includes alpha
-                    if (hex.Length == 9)
-                    {
-                        // Parse ARGB
-                        
-                        byte a = byte.Parse(hex.Substring(1, 2));
-                        byte r = byte.Parse(hex.Substring(3, 2));
-                        byte g = byte.Parse(hex.Substring(5, 2));
-                        byte b = byte.Parse(hex.Substring(7, 2));
-                        return Color.FromArgb(a, r, g, b);
-                    }
-                    else
-                    {
-                        // Parse RGB
-                        byte r = byte.Parse(hex.Substring(1, 2));
-                        byte g = byte.Parse(hex.Substring(3, 2));
-                        byte b = byte.Parse(hex.Substring(5, 2));
-                        return Color.FromRgb(r, g, b);
-                    }
+                    // Parse ARGB
+                    byte a = byte.Parse(hex.Substring(1, 2));
+                    byte r = byte.Parse(hex.Substring(3, 2));
+                    byte g = byte.Parse(hex.Substring(5, 2));
+                    byte b = byte.Parse(hex.Substring(7, 2));
+                    return Color.FromArgb(a, r, g, b);
+                    
                 }
             }
             // Return Transparent if the input is invalid

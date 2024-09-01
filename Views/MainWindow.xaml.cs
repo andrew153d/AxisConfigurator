@@ -22,61 +22,9 @@ namespace AxisConfigurator
     /// </summary>
     public partial class MainWindow
     {
-        AxisConnection axisComms = new AxisConnection();
         public MainWindow()
         {
             InitializeComponent();
-            axisComms.PortConnectedAction += OnPortConnectionUpdate;
-        }
-
-        private void MyTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Ensure the event handler is not triggered when the control is being initialized
-            if (e.AddedItems.Count > 0)
-            {
-                // Get the selected TabItem
-                TabItem selectedTab = (TabItem)MainTabControl.SelectedItem;
-
-                // Call functions based on the selected tab
-                if (selectedTab == Status)
-                {
-                    //OnTab1Selected();
-                }
-                else if (selectedTab == LED)
-                {
-                    //ledView.OnLedTabSelected();
-                }
-                else if (selectedTab == TabItem)
-                {
-                    //OnTab3Selected();
-                }
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (axisComms.isConnected)
-            {
-                axisComms.Disconnect();
-            }
-            else
-            {
-                axisComms.Connect();
-            }
-        }
-
-        public void OnPortConnectionUpdate(bool connected)
-        {
-            if(connected)
-            {
-                ConnectButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Green);
-                ConnectButton.Content = "Connected";
-            }
-            else
-            {
-                ConnectButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Red);
-                ConnectButton.Content = "Disconnected";
-            }
-        }     
+        }   
     }
 }

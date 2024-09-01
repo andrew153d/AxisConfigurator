@@ -95,3 +95,9 @@ C:\Users\Andre\Documents\AxisConfigurator\obj\Debug\net7.0-windows\refint\AxisCo
 C:\Users\Andre\Documents\AxisConfigurator\obj\Debug\net7.0-windows\AxisConfigurator.pdb
 C:\Users\Andre\Documents\AxisConfigurator\obj\Debug\net7.0-windows\AxisConfigurator.genruntimeconfig.cache
 C:\Users\Andre\Documents\AxisConfigurator\obj\Debug\net7.0-windows\ref\AxisConfigurator.dll
+C:\Users\Andre\Documents\Tracked_Projects\AxisConfigurator\obj\Debug\net7.0-windows\Views\TMCView.g.cs
+C:\Users\Andre\Documents\Tracked_Projects\AxisConfigurator\obj\Debug\net7.0-windows\Views\TMCView.baml
+C:\Users\Andre\Documents\Tracked_Projects\AxisConfigurator\obj\Debug\net7.0-windows\Views\MotionView.g.cs
+C:\Users\Andre\Documents\Tracked_Projects\AxisConfigurator\obj\Debug\net7.0-windows\Views\MotionView.baml
+C:\Users\Andre\Documents\Tracked_Projects\AxisConfigurator\obj\Debug\net7.0-windows\Views\SerialView.g.cs
+C:\Users\Andre\Documents\Tracked_Projects\AxisConfigurator\obj\Debug\net7.0-windows\Views\SerialView.baml
