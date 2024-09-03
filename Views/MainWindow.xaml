@@ -13,12 +13,12 @@
     <StackPanel Background="White">
         <views:SerialView/>
         <!--<Button x:Name="ConnectButton" Content="Connect" Click="Button_Click" Background="#FF909090" Height="15" Width="100"/>-->
-        <TabControl x:Name="MainTabControl" Grid.Column="0" SelectedIndex="3" Height="415">
+        <TabControl x:Name="MainTabControl" Grid.Column="0" SelectedIndex="1" Height="415">
             <TabItem Header="Status" Name="Status">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
             <TabItem Header="Motion" Name="Motion">
-                <Grid Background="#FFE5E5E5"/>
+                <views:MotionView/>
             </TabItem>
             <TabItem Header="Motor" Name="Motor">
                 <views:TMCView/>

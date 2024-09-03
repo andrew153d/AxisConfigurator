@@ -11,21 +11,14 @@ namespace AxisConfigurator.Models
 {
     public class MotionModel : INotifyPropertyChanged
     {
-        public enum ControlType
-        {
-            POSITION,
-            VELOCITY,
-            TORQUE
-        };
-
         public struct MotionFrame
         {
-            ControlType control;
+            byte control;
             float Target;
             long time;
         }
 
-        public ControlType controlType;
+        public ObservableCollection<string> MotionMode;
         public float TargetVelocity;
         public float TargetPosition;
         public float TargetTorque;
@@ -43,6 +36,7 @@ namespace AxisConfigurator.Models
         public MotionModel() 
         { 
             MotionFrames = new ObservableCollection<MotionFrame>();
+            MotionMode = new ObservableCollection<string> {"OFF","POSITION","VELOCITY","TORQUE"};
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

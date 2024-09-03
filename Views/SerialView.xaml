@@ -6,15 +6,17 @@
              xmlns:local="clr-namespace:AxisConfigurator.Views"
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal" Height="20">
-        <Button Content="Connect" Width="100" Command="{Binding ConnectCommand}">
+        <Button Width="100" Command="{Binding ConnectCommand}">
             <Button.Style>
                 <Style TargetType="Button">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding PortConnected}" Value="True">
                             <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Content" Value="Disconnect"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding PortConnected}" Value="False">
                             <Setter Property="Background" Value="Red"/>
+                            <Setter Property="Content" Value="Connect"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
